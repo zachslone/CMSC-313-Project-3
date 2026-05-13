@@ -18,12 +18,12 @@ int main(int argc, char *argv[]) {
   unsigned int address = 0;
 
   while ((bytesRead = fread(buffer, 1, 16, fp)) > 0) {
-    printf("%08x ", address);
+    printf("%08x", address);
     for (int i = 0; i < 16; i++) {
       if (i < bytesRead) {
-        printf("%02x ", buffer[i]);
+        printf("%02x", buffer[i]);
       } else {
-          printf("  ");
+          printf("   ");
       }
     }
 
