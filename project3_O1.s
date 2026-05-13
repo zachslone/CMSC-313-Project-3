@@ -1,6 +1,6 @@
 	.file	"project3.c"
 	.text
-	.section	.rodata
+	.section	.rodata.str1.1,"aMS",@progbits,1
 .LC0:
 	.string	"Usage: %s <filename>\n"
 .LC1:
@@ -19,149 +19,148 @@
 	.globl	main
 	.type	main, @function
 main:
-.LFB0:
+.LFB25:
 	.cfi_startproc
 	endbr64
-	pushq	%rbp
+	pushq	%r15
 	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp
-	.cfi_def_cfa_register 6
-	subq	$80, %rsp
-	movl	%edi, -68(%rbp)
-	movq	%rsi, -80(%rbp)
+	.cfi_offset 15, -16
+	pushq	%r14
+	.cfi_def_cfa_offset 24
+	.cfi_offset 14, -24
+	pushq	%r13
+	.cfi_def_cfa_offset 32
+	.cfi_offset 13, -32
+	pushq	%r12
+	.cfi_def_cfa_offset 40
+	.cfi_offset 12, -40
+	pushq	%rbp
+	.cfi_def_cfa_offset 48
+	.cfi_offset 6, -48
+	pushq	%rbx
+	.cfi_def_cfa_offset 56
+	.cfi_offset 3, -56
+	subq	$56, %rsp
+	.cfi_def_cfa_offset 112
 	movq	%fs:40, %rax
-	movq	%rax, -8(%rbp)
+	movq	%rax, 40(%rsp)
 	xorl	%eax, %eax
-	cmpl	$1, -68(%rbp)
-	jg	.L2
-	movq	-80(%rbp), %rax
-	movq	(%rax), %rax
-	movq	%rax, %rsi
-	leaq	.LC0(%rip), %rax
-	movq	%rax, %rdi
-	movl	$0, %eax
-	call	printf@PLT
-	movl	$1, %eax
-	jmp	.L15
-.L2:
-	movq	-80(%rbp), %rax
-	addq	$8, %rax
-	movq	(%rax), %rax
-	leaq	.LC1(%rip), %rdx
-	movq	%rdx, %rsi
-	movq	%rax, %rdi
+	cmpl	$1, %edi
+	jle	.L17
+	movq	8(%rsi), %rdi
+	leaq	.LC1(%rip), %rsi
 	call	fopen@PLT
-	movq	%rax, -48(%rbp)
-	cmpq	$0, -48(%rbp)
-	jne	.L4
-	leaq	.LC2(%rip), %rax
-	movq	%rax, %rdi
+	movq	%rax, 8(%rsp)
+	testq	%rax, %rax
+	je	.L18
+	movl	$0, %r14d
+	leaq	.LC5(%rip), %r13
+	leaq	.LC4(%rip), %r12
+	jmp	.L4
+.L17:
+	movq	(%rsi), %rdx
+	leaq	.LC0(%rip), %rsi
+	movl	$2, %edi
+	call	__printf_chk@PLT
+	movl	$1, %eax
+	jmp	.L1
+.L18:
+	leaq	.LC2(%rip), %rdi
 	call	perror@PLT
 	movl	$1, %eax
-	jmp	.L15
-.L4:
-	movl	$0, -60(%rbp)
-	jmp	.L5
-.L14:
-	movl	-60(%rbp), %eax
-	movl	%eax, %esi
-	leaq	.LC3(%rip), %rax
-	movq	%rax, %rdi
+	jmp	.L1
+.L5:
+	movq	%r13, %rsi
+	movl	$2, %edi
 	movl	$0, %eax
-	call	printf@PLT
-	movl	$0, -56(%rbp)
-	jmp	.L6
-.L9:
-	movl	-56(%rbp), %eax
-	cltq
-	cmpq	-40(%rbp), %rax
-	jnb	.L7
-	movl	-56(%rbp), %eax
-	cltq
-	movzbl	-32(%rbp,%rax), %eax
-	movzbl	%al, %eax
-	movl	%eax, %esi
-	leaq	.LC4(%rip), %rax
-	movq	%rax, %rdi
-	movl	$0, %eax
-	call	printf@PLT
-	jmp	.L8
-.L7:
-	leaq	.LC5(%rip), %rax
-	movq	%rax, %rdi
-	movl	$0, %eax
-	call	printf@PLT
-.L8:
-	addl	$1, -56(%rbp)
+	call	__printf_chk@PLT
 .L6:
-	cmpl	$15, -56(%rbp)
-	jle	.L9
+	addq	$1, %rbx
+	cmpq	$16, %rbx
+	je	.L19
+.L7:
+	cmpq	%rbp, %rbx
+	jnb	.L5
+	movzbl	(%rbx,%r15), %edx
+	movq	%r12, %rsi
+	movl	$2, %edi
+	movl	$0, %eax
+	call	__printf_chk@PLT
+	jmp	.L6
+.L19:
 	movl	$124, %edi
 	call	putchar@PLT
-	movl	$0, -52(%rbp)
-	jmp	.L10
-.L13:
 	call	__ctype_b_loc@PLT
-	movq	(%rax), %rdx
-	movl	-52(%rbp), %eax
-	cltq
-	movzbl	-32(%rbp,%rax), %eax
-	movzbl	%al, %eax
-	addq	%rax, %rax
-	addq	%rdx, %rax
-	movzwl	(%rax), %eax
-	movzwl	%ax, %eax
-	andl	$16384, %eax
-	testl	%eax, %eax
-	je	.L11
-	movl	-52(%rbp), %eax
-	cltq
-	movzbl	-32(%rbp,%rax), %eax
-	movzbl	%al, %eax
-	movl	%eax, %edi
-	call	putchar@PLT
-	jmp	.L12
-.L11:
+	movq	%rax, %r15
+	leaq	16(%rsp), %rbx
+	addq	%rbx, %rbp
+	jmp	.L10
+.L8:
 	movl	$46, %edi
 	call	putchar@PLT
-.L12:
-	addl	$1, -52(%rbp)
+.L9:
+	addq	$1, %rbx
+	cmpq	%rbp, %rbx
+	je	.L20
 .L10:
-	movl	-52(%rbp), %eax
-	cltq
-	cmpq	-40(%rbp), %rax
-	jb	.L13
-	leaq	.LC6(%rip), %rax
-	movq	%rax, %rdi
+	movzbl	(%rbx), %edi
+	movzbl	%dil, %edx
+	movq	(%r15), %rax
+	testb	$64, 1(%rax,%rdx,2)
+	je	.L8
+	movzbl	%dil, %edi
+	call	putchar@PLT
+	jmp	.L9
+.L20:
+	leaq	.LC6(%rip), %rdi
 	call	puts@PLT
-	addl	$16, -60(%rbp)
-.L5:
-	movq	-48(%rbp), %rdx
-	leaq	-32(%rbp), %rax
-	movq	%rdx, %rcx
+	addl	$16, %r14d
+.L4:
+	leaq	16(%rsp), %rdi
+	movq	8(%rsp), %rcx
 	movl	$16, %edx
 	movl	$1, %esi
-	movq	%rax, %rdi
 	call	fread@PLT
-	movq	%rax, -40(%rbp)
-	cmpq	$0, -40(%rbp)
-	jne	.L14
-	movq	-48(%rbp), %rax
-	movq	%rax, %rdi
+	movq	%rax, %rbp
+	testq	%rax, %rax
+	je	.L21
+	movl	%r14d, %edx
+	leaq	.LC3(%rip), %rsi
+	movl	$2, %edi
+	movl	$0, %eax
+	call	__printf_chk@PLT
+	movl	$0, %ebx
+	leaq	16(%rsp), %r15
+	jmp	.L7
+.L21:
+	movq	8(%rsp), %rdi
 	call	fclose@PLT
 	movl	$0, %eax
-.L15:
-	movq	-8(%rbp), %rdx
+.L1:
+	movq	40(%rsp), %rdx
 	subq	%fs:40, %rdx
-	je	.L16
-	call	__stack_chk_fail@PLT
-.L16:
-	leave
-	.cfi_def_cfa 7, 8
+	jne	.L22
+	addq	$56, %rsp
+	.cfi_remember_state
+	.cfi_def_cfa_offset 56
+	popq	%rbx
+	.cfi_def_cfa_offset 48
+	popq	%rbp
+	.cfi_def_cfa_offset 40
+	popq	%r12
+	.cfi_def_cfa_offset 32
+	popq	%r13
+	.cfi_def_cfa_offset 24
+	popq	%r14
+	.cfi_def_cfa_offset 16
+	popq	%r15
+	.cfi_def_cfa_offset 8
 	ret
+.L22:
+	.cfi_restore_state
+	call	__stack_chk_fail@PLT
 	.cfi_endproc
-.LFE0:
+.LFE25:
 	.size	main, .-main
 	.ident	"GCC: (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0"
 	.section	.note.GNU-stack,"",@progbits
