@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <ctype.h>
 
-int main(int argc, char *argv[] {
+int main(int argc, char *argv[]) {
   if (argc < 2) {
     printf("Usage: %s <filename>\n", argv[0]);
     return 1;
@@ -36,7 +36,7 @@ int main(int argc, char *argv[] {
       }
     }
     printf("|\n");
-    address += 16
+    address += 16;
   }
   fclose(fp);
   return 0;
