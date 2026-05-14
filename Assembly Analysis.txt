@@ -1,1 +1,21 @@
+O0 Optimization
+    This optimization level has no optimization.
+    All of the variables are stored on the stack, and they get moved into the registers for every single operation.
+    Uses a frame pointer to access the variables.
+    The point of this optimization is to make it easy for debugging. It directly correlates with each line of C code.
+    Since variables have to be moved back and forth from the stack to registers, this makes this a slow process.
 
+O1 Optimization
+    This removes the frame pointer used in O0
+    At line 25 you can see where the frame pointer isn't used and instead it uses registers that it keeps values in through the loop
+    At line 48 the comparison happens in a register as opposed to the back and forth that O0 does.
+    For the loops doing the hex and ASCII printing, this uses 0 extra memory overhead. Whereas O0 does 4 memory operations per loop iteration.
+
+O3 Optimization
+    In O1 the fread call happens at the top of loop at line 71, and in O1 it happens at the end of the loop at 123. 
+    Uses .p2align before loops so the loops are at specific memory addresses that make it easier for the CPU to find.
+    Builds off a lot of the Optimizations that happens in O1. 
+
+Overall O0 the biggest difference is between O0 and O1. This is when the code moves from a stack based variable access and uses registers instead.
+This change significantly cuts down on the memory usage and latency of operations as register operations are much faster than stack operations.
+The change from O1 to O3 seems to be focusing on making CPU operations slightly better for the CPU but I don't think they will have anywhere near the impact that O0 to O1 had.
